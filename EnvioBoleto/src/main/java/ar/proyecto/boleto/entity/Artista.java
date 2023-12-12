@@ -1,24 +1,45 @@
 package ar.proyecto.boleto.entity;
 
+import org.springframework.stereotype.Component;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
 /**
  * Clase que representa al artista que esta en el sistema
  */
+@Component
+@Entity
+@Table(name="artistas")
 public class Artista {
 
 	/**
 	 * Representa el id del artista
 	 */
-	private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="art_id")
+	private Long id;
 
 	/**
 	 * Representa el nombre artistico del artista
 	 */
+	@Column(name = "art_nombre")
 	private String nombre_artistico;
 
 	/**
 	 * Representa el genero musical del artista
 	 */
+	@Column(name = "art_gen_musical")
 	private String genero_musical;
+	
+	@OneToOne
+	private Evento evento;
 
 	/**
 	 * Constructor por defecto

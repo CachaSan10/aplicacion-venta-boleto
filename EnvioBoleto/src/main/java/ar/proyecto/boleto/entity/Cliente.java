@@ -1,31 +1,51 @@
 package ar.proyecto.boleto.entity;
 
+import org.springframework.stereotype.Component;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 /**
  * Clase que representa al cliente que esta en el sistema
  */
+@Component
+@Entity
+@Table(name = "clientes")
 public class Cliente {
 
 	/**
 	 * Representa el id del cliente
 	 */
-	private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "cli_id")
+	private Long id;
 
 	/**
 	 * Representa el nombre del cliente
 	 */
+	@Column(name = "cli_nombre")
 	private String nombre;
 
 	/**
 	 * Representa el apellido del cliente
 	 */
+	@Column(name = "cli_apellido")
 	private String apellido;
 
 	/**
 	 * Representa el correo electronico del cliente
 	 */
+	@Column(name = "cli_correo")
 	private String correo_electronico;
+	
+	@ManyToOne
+	private Ticket ticket;
 
 	/**
 	 * Constructor por defecto
