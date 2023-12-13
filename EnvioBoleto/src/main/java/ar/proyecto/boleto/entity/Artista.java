@@ -7,7 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /**
@@ -38,7 +38,10 @@ public class Artista {
 	@Column(name = "art_gen_musical")
 	private String genero_musical;
 	
-	@OneToOne
+	/**
+	 * Representa el evento donde el artista dara el espectaculo
+	 */
+	@OneToMany(mappedBy = "artista")
 	private Evento evento;
 
 	/**
@@ -49,27 +52,27 @@ public class Artista {
 	}
 
 	/**
-	 * Constructor parametrizado
-	 * 
 	 * @param nombre_artistico
 	 * @param genero_musical
+	 * @param evento
 	 */
-	public Artista(String nombre_artistico, String genero_musical) {
+	public Artista(String nombre_artistico, String genero_musical, Evento evento) {
 		this.nombre_artistico = nombre_artistico;
 		this.genero_musical = genero_musical;
+		this.evento = evento;
 	}
 
 	/**
 	 * @return the id
 	 */
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -101,10 +104,28 @@ public class Artista {
 		this.genero_musical = genero_musical;
 	}
 
+	/**
+	 * @return the evento
+	 */
+	public Evento getEvento() {
+		return evento;
+	}
+
+	/**
+	 * @param evento the evento to set
+	 */
+	public void setEvento(Evento evento) {
+		this.evento = evento;
+	}
+
 	@Override
 	public String toString() {
 		return "Artista [id=" + id + ", nombre_artistico=" + nombre_artistico + ", genero_musical=" + genero_musical
-				+ "]";
+				+ ", evento=" + evento + "]";
 	}
+	
+	
+
+	
 
 }

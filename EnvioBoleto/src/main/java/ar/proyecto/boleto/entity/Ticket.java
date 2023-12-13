@@ -8,7 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 /**
@@ -27,17 +27,7 @@ public class Ticket {
 	@Column(name = "tick_id")
 	private Long id;
 
-	/**
-	 * Representa la categoria del ticket
-	 */
-	@Column(name = "tick_categoria")
-	private String categoria;
 
-	/**
-	 * Representa el precio de la entrada del ticket
-	 */
-	@Column(name = "tick_precio")
-	private float precio;
 
 	/**
 	 * Representa el evento del ticket
@@ -48,7 +38,7 @@ public class Ticket {
 	/**
 	 * Representa el cliente del ticket
 	 */
-	@OneToMany(mappedBy = "ticket")
+	@OneToOne(mappedBy = "ticket")
 	private Cliente cliente;
 
 
@@ -58,61 +48,71 @@ public class Ticket {
 	public Ticket() {
 	}
 
+
 	/**
-	 * Constructor Parametrizado
-	 * @param categoria
-	 * @param precio
+	 * @param evento
+	 * @param cliente
 	 */
-	public Ticket( String categoria, float precio) {
-		this.categoria = categoria;
-		this.precio = precio;
-		
+	public Ticket(Evento evento, Cliente cliente) {
+		this.evento = evento;
+		this.cliente = cliente;
 	}
+
 
 	/**
 	 * @return the id
 	 */
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
+
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 
-
 	/**
-	 * @return the categoria
+	 * @return the evento
 	 */
-	public String getCategoria() {
-		return categoria;
+	public Evento getEvento() {
+		return evento;
 	}
 
-	/**
-	 * @param categoria the categoria to set
-	 */
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
-	}
 
 	/**
-	 * @return the precio
+	 * @param evento the evento to set
 	 */
-	public float getPrecio() {
-		return precio;
+	public void setEvento(Evento evento) {
+		this.evento = evento;
 	}
+
 
 	/**
-	 * @param precio the precio to set
+	 * @return the cliente
 	 */
-	public void setPrecio(float precio) {
-		this.precio = precio;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
+
+	/**
+	 * @param cliente the cliente to set
+	 */
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Ticket [id=" + id + ", evento=" + evento + ", cliente=" + cliente + "]";
+	}
+
+	
 	
 	
 
