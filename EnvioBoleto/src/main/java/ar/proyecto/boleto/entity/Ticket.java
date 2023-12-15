@@ -38,7 +38,7 @@ public class Ticket {
 	/**
 	 * Representa el cliente del ticket
 	 */
-	@OneToOne(mappedBy = "ticket")
+	@ManyToOne
 	private Cliente cliente;
 
 
